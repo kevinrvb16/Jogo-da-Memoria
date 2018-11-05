@@ -8,26 +8,29 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.lang.*;
+import java.math.*;
 
-public class JogoFacil extends JFrame {
+public class JogoFacil extends JFrame { //implements Jogo
 	private JButton carta;
-	Icon fundo1;
 	MouseEvent clique;
+	private final ImageIcon[] arrayFundos = {
+			new ImageIcon("01.jpg"),
+			new ImageIcon("02.jpg")
+	};
 	
 		public JogoFacil() {
 			super("Jogo da Memoria");
-			
 			setLayout(new GridBagLayout());
-			fundo1 = new ImageIcon(getClass().getResource("FUNDO.jpg"));
-			carta = new JButton(fundo1);
+			arrayFundos[0] = new ImageIcon(getClass().getResource("FUNDO.jpg"));
+			carta = new JButton(arrayFundos[0]);
 			add(carta);
 			carta.addMouseListener(
 					new MouseListener() {
 
 						@Override
 						public void mouseClicked(MouseEvent arg0) {
-							fundo1 = new ImageIcon(getClass().getResource("01.jpg"));
-							carta.setIcon(fundo1);
+							arrayFundos[0] = new ImageIcon(getClass().getResource("01.jpg"));
+							carta.setIcon(arrayFundos[0]);
 						}
 
 						@Override
@@ -61,3 +64,5 @@ public class JogoFacil extends JFrame {
 		
 		
 }
+
+
