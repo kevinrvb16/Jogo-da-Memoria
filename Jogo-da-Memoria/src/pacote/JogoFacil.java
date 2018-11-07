@@ -14,9 +14,9 @@ public class JogoFacil extends JFrame { //implements Jogo
 	private JButton[] cartas;
 	MouseEvent clique;
 	private final ImageIcon[] arrayFundos = {
-			new ImageIcon("FUNDO.jpg"),
-			new ImageIcon("1.jpg"),
-			new ImageIcon("2.jpg")
+			new ImageIcon(getClass().getResource("FUNDO.jpg")),
+			new ImageIcon(getClass().getResource("1.jpg")),
+			new ImageIcon(getClass().getResource("2.jpg"))
 	};
 	
 		public JogoFacil() {
