@@ -11,58 +11,56 @@ import java.lang.*;
 import java.math.*;
 
 public class JogoFacil extends JFrame { //implements Jogo
-	private JButton carta;
+	private JButton[] cartas;
 	MouseEvent clique;
 	private final ImageIcon[] arrayFundos = {
-			new ImageIcon("01.jpg"),
-			new ImageIcon("02.jpg")
+			new ImageIcon("FUNDO.jpg"),
+			new ImageIcon("1.jpg"),
+			new ImageIcon("2.jpg")
 	};
 	
 		public JogoFacil() {
 			super("Jogo da Memoria");
 			setLayout(new GridBagLayout());
-			arrayFundos[0] = new ImageIcon(getClass().getResource("FUNDO.jpg"));
-			carta = new JButton(arrayFundos[0]);
-			add(carta);
-			carta.addMouseListener(
-					new MouseListener() {
+			cartas = new JButton[2];
+			
+			//colocando fundo
+			for(int i = 0; i < 2; i++) {
+			cartas[i] = new JButton(arrayFundos[0]);}
+			
+			//adicionando cartas ao frame?
+			for(int i = 0; i < 2; i++) {
+			add(cartas[i]);}
+			
+			
+			//adicionando handlers
+			ButtonHandler handler = new ButtonHandler();
+			for(int i = 0; i < 2; i++) {
+			cartas[i].addActionListener(handler);
+			}
+			
+		}
+			
+		
+		
+		
+		//clase listener com erro
+	class ButtonHandler implements ActionListener {
 
-						@Override
-						public void mouseClicked(MouseEvent arg0) {
-							arrayFundos[0] = new ImageIcon(getClass().getResource("01.jpg"));
-							carta.setIcon(arrayFundos[0]);
-						}
-
-						@Override
-						public void mouseEntered(MouseEvent arg0) {
-							// TODO Auto-generated method stub
-							
-						}
-
-						@Override
-						public void mouseExited(MouseEvent arg0) {
-							// TODO Auto-generated method stub
-							
-						}
-
-						@Override
-						public void mousePressed(MouseEvent arg0) {
-							// TODO Auto-generated method stub
-							
-						}
-
-						@Override
-						public void mouseReleased(MouseEvent arg0) {
-							// TODO Auto-generated method stub
-							
-						}
-						
-					}
-					);
+		@Override
+		public void actionPerformed(ActionEvent event) {
+			JButton botao1 = (JButton) event.getSource();
+			int random = (int) (Math.random() * 2);
+			arrayFundos[0] = new ImageIcon(getClass().getResource("1.jpg"));
+			arrayFundos[1] = new ImageIcon(getClass().getResource("2.jpg"));
+			botao1.setIcon(arrayFundos[random]);
+			System.out.println(botao1);
+			
 		}
 		
-		
-		
-}
+	}
+	}
+
+
 
 
