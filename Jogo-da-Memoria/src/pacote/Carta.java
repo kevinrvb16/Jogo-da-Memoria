@@ -16,7 +16,6 @@ public class Carta extends JButton {
 				new ImageIcon(getClass().getResource("4.jpg")),
 				new ImageIcon(getClass().getResource("5.jpg")),
 				new ImageIcon(getClass().getResource("6.jpg")),
-				//new ImageIcon(getClass().getResource("7.jpg"))
 		};
 		
 		public Carta(int numeroImagem) {
@@ -28,7 +27,7 @@ public class Carta extends JButton {
 		}
 		
 		public Carta() {
-			// TODO Auto-generated constructor stub
+
 		}
 
 		public int getNumeroImagem() {
