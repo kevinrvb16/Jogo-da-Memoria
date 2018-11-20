@@ -7,15 +7,13 @@ import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.lang.*;
-import java.math.*;
 import java.util.Collections;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Jogo extends controladorJogo{
-	private Carta[] cartas;
+public class Jogo extends JogosMae{
+	protected Carta[] cartas;
+	private JPanel painelA;
 	
 
 	
@@ -38,11 +36,14 @@ public class Jogo extends controladorJogo{
     	
 		public Jogo() {
 			
+			super();
 			//nao funcionou pra ImageIcon, vamos relacionar cada carta com uma posicao pra fazer
 			Collections.sort(posicao);
 			Collections.sort(posicao);
-
-			setLayout(new GridBagLayout());
+			
+			painelA = new JPanel();
+			add(painelA);
+			painelA.setLayout(new GridBagLayout());
 			cartas = new Carta[6];
                         
 			
@@ -57,18 +58,15 @@ public class Jogo extends controladorJogo{
 					
 			//adicionando cartas ao frame
 			for(int i = 0; i < 6; i++) {
-			add(cartas[i]);}
+			painelA.add(cartas[i]);}
 
 			
 			//adicionando handlers
 			ButtonHandler handler = new ButtonHandler();
 			for(int i = 0; i < 6; i++) {
-			cartas[i].addActionListener(handler);
+				cartas[i].addActionListener(handler);
 			}
-
-			
 		}
-		
 	//classe listener com erro
 	class ButtonHandler implements ActionListener {
             Carta botao1 = null;
