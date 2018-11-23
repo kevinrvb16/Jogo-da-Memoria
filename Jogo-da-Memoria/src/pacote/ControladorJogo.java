@@ -14,11 +14,11 @@ import javax.swing.JButton;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-
 public class ControladorJogo extends JFrame {
 
     protected JPanel painel;
@@ -27,23 +27,20 @@ public class ControladorJogo extends JFrame {
     protected JButton opcaoNivel;
     //protected JButton pausar;
     protected JButton sair;
-    protected String nivelSelecionado;
+    protected String nivelSelecionado = "facil";
     protected JButton facil;
     protected JButton medio;
     protected JButton dificil;
     protected JDesktopPane desktop;
     protected ImageIcon icon;
     protected Image image;
-    
-    
+	 
     public ControladorJogo(){
         
-        super("Jogo da MemÛria");
-        
-        //setExtendedState(MAXIMIZED_BOTH);
+        super("Jogo da Mem√≥ria");
         JMenuBar bar = new JMenuBar();
-        JMenu menu= new JMenu("Opcoes");
-        JMenuItem frameInterno = new JMenuItem("Selecionar NÌvel");
+        JMenu menu= new JMenu("Opc√µes");
+        JMenuItem frameInterno = new JMenuItem("Selecionar N√≠vel");
         
         setJMenuBar(bar);
         bar.add(menu);
@@ -64,19 +61,14 @@ public class ControladorJogo extends JFrame {
 					@Override
 					public void actionPerformed(ActionEvent arg0) {
 						JInternalFrame frame = new JInternalFrame("Selecione", true, true, true, true);
-						
-						//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 						JPanel painelB = new JPanel();
-						//painelB.setVisible(true);
 						frame.add(painelB, BorderLayout.CENTER);
 						frame.setSize(160, 170);
 						frame.setVisible(true);
 						desktop.add(frame);
-						facil = new JButton(" NÌvel F·cil ");
-						
-						medio = new JButton(" NÌvel MÈdio ");
-						
-						dificil = new JButton(" NÌvel Dificil ");
+						facil = new JButton(" N√≠vel F√°cil ");
+						medio = new JButton(" N√≠vel M√©dio ");
+						dificil = new JButton(" N√≠vel Dif√≠cil ");
 						
 						painelB.add(facil);
 						painelB.add(medio);
@@ -92,7 +84,7 @@ public class ControladorJogo extends JFrame {
 						medio.addActionListener( new ActionListener() {
 							@Override
 							public void actionPerformed(ActionEvent arg0) {
-								nivelSelecionado ="medio";
+								nivelSelecionado ="m√©dio";
 								frame.setVisible(false);
 							}
 						});
@@ -100,21 +92,16 @@ public class ControladorJogo extends JFrame {
 
 							@Override
 							public void actionPerformed(ActionEvent arg0) {
-								nivelSelecionado ="dificil";
+								nivelSelecionado ="dif√≠cil";
 								frame.setVisible(false);
 							}	
 						});
 					}
         		}	
         );
-        
         ImageIcon icon = new ImageIcon(getClass().getResource("dog.jpg"));
         image = icon.getImage();
-        //painel = new JPanel();
-        //painel.setBackground(new Color(3).magenta);
-        //painel.setLayout();
         GridLayout grid = new GridLayout();
-        
         
         iniciar = new JButton("START");
         iniciar.addActionListener(
@@ -122,41 +109,37 @@ public class ControladorJogo extends JFrame {
 
 					@Override
 					public void actionPerformed(ActionEvent arg0) {
-						
+						System.out.println(nivelSelecionado);
 						if(nivelSelecionado.equalsIgnoreCase("facil")){
-							Jogo jogoFacil = new Jogo();
+							JogoFacil jogoFacil = new JogoFacil();
 							jogoFacil.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 							jogoFacil.setSize(800, 500);
 							jogoFacil.setVisible(true);
 							jogoFacil.setResizable(true);
 						}
-						if(nivelSelecionado.equalsIgnoreCase("medio")){
-							Jogo jogoNormal = new Jogo();
+						if(nivelSelecionado.equalsIgnoreCase("m√©dio")){
+							JogoFacil jogoNormal = new JogoFacil();
 							jogoNormal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 							jogoNormal.setSize(800, 500);
 							jogoNormal.setVisible(true);
 							jogoNormal.setResizable(true);
 						}
-						if(nivelSelecionado.equalsIgnoreCase("dificil")){
-							Jogo jogoDificil = new Jogo();
+						if(nivelSelecionado.equalsIgnoreCase("dif√≠cil")){
+							JogoFacil jogoDificil = new JogoFacil();
 							jogoDificil.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 							jogoDificil.setSize(800, 500);
 							jogoDificil.setVisible(true);
 							jogoDificil.setResizable(true);
 						}
 					}
-        	
         }
         );
-        
-        
         ranking = new JButton("RANKING");
         ranking.addActionListener( 
         		new ActionListener() {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						// TODO Auto-generated method stub
 						
 					}
         			
@@ -189,6 +172,6 @@ public class ControladorJogo extends JFrame {
       
         desktop.add(sair);
         sair.setSize(230,40);
-        sair.setLocation(310, 420);  
-    } 
+        sair.setLocation(310, 420); 
+    }
 }
