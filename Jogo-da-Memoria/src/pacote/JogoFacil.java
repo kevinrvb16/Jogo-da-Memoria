@@ -3,18 +3,23 @@ package pacote;
 import javax.swing.*;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.List;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.util.Collections;
+import java.util.Random;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class JogoFacil extends JogosMae{
 	protected Carta[] cartas;
 	private JPanel painelA;
-        
+	boolean comecou = false;
+	int contaClique = 0;
 	MouseEvent clique;
+	private ImageIcon[] cartaComPar = new ImageIcon[8];
 	public final ImageIcon imagemFundo = new ImageIcon(getClass().getResource("FUNDO.jpg"));
 	public final ImageIcon[] arrayFundos = {
 			new ImageIcon(getClass().getResource("1.jpg")),
@@ -48,15 +53,10 @@ public class JogoFacil extends JogosMae{
 			new ImageIcon(getClass().getResource("29.jpg")),
 			new ImageIcon(getClass().getResource("30.jpg")),
 	};
-	
-		//ArrayList<String> imagemSorteada = (ArrayList<String>) (Arrays.asList(arrayFundos));
-                
+      
 		public JogoFacil() {
 			
 			super();
-			
-			///////////////////////////////////////////////////SORTEANDO AS IMAGENS DAS CARTAS
-			//Arrays.sort(arrayFundos);
 						
             int qtdCartas = 8;
             int qtdImagens = 4;
@@ -77,18 +77,40 @@ public class JogoFacil extends JogosMae{
 			
 			//adicionando imagem de fundo para todas as cartas
 			for(int i = 0; i < qtdCartas; i++) {
-			cartas[i].setIcon(imagemFundo);
+				cartas[i].setIcon(imagemFundo);
 			}
 								
 			//adicionando todas as cartas ao frame
 			for(int i = 0; i < qtdCartas; i++) {
-			painelA.add(cartas[i]);}
+				painelA.add(cartas[i]);
+			}
 			
 			//adicionando handlers a todas as cartas
 			ButtonHandler handler = new ButtonHandler();
 			for(int i = 0; i < qtdCartas; i++) {
 				cartas[i].addActionListener(handler);
 			}                       
+		}
+		
+		public void sortear() {
+			ImageIcon aux;
+			Random random = new Random();
+			for (int i = 0; i < 29; i++) {
+				aux = arrayFundos[i];
+				int rng = random.nextInt(30);//rng = Random Number Generators
+				arrayFundos[i] = arrayFundos[rng];
+				arrayFundos[rng] = aux;
+			}
+
+			cartaComPar[0] = arrayFundos[0];
+			cartaComPar[1] = arrayFundos[1];
+			cartaComPar[2] = arrayFundos[2];
+			cartaComPar[3] = arrayFundos[3];
+			cartaComPar[4] = arrayFundos[0];
+			cartaComPar[5] = arrayFundos[1];
+			cartaComPar[6] = arrayFundos[2];
+			cartaComPar[7] = arrayFundos[3];
+			
 		}
                   
 	//classe listener com erro
@@ -99,8 +121,22 @@ public class JogoFacil extends JogosMae{
             
 		@Override
 		public void actionPerformed(ActionEvent event) {
-			Carta source = null;
-                        botao1 = (Carta) event.getSource();
+			if (contaClique == 2) {
+            	for(int i = 0; i < 8; i++) {
+    				cartas[i].setIcon(imagemFundo);
+    			}
+            	contaClique = 0;
+            }
+            contaClique++;
+			Random num = new Random();
+			Carta botao = (Carta) event.getSource();
+			if (!comecou) { 
+				sortear(); 
+			}
+			comecou = true;
+            botao.setIcon(cartaComPar[num.nextInt(4)]);
+            
+            
 				/*//System.out.println("botao1= "+botao1);
 				//System.out.println("botao2= "+botao2);
 				while((botao1 == null || botao2 == null) && botao2Clicado == false) {
@@ -125,8 +161,9 @@ public class JogoFacil extends JogosMae{
                 
                 //metodo compara cartas
                 //if(botao1.getImagemFundo() == botao2.getImagemFundo()) {}
-			}	
+			//}	
 			
 			//public void comparaCartas() 
-		}       
+		}   
+	}
 }

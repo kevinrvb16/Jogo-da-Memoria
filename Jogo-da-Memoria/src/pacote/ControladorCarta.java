@@ -16,9 +16,8 @@ public class ControladorCarta implements IControladorCarta {
 	}
 
 	@Override
-	public void virarCarta() {
-		// if a carta eh clicada, recebe uma imagem sorteada 
-		// 2 botoes tem cartas iguais
+	public void virarCarta(Carta botao) {
+		// 
 	}
 
 	@Override

@@ -4,7 +4,7 @@ public interface IControladorCarta {
 
 	public void comparaCarta(Carta botao1, Carta botao2);
 	
-	public void virarCarta();
+	public void virarCarta(Carta botao);
 	
 	public void sumir(Carta carta);
 	
