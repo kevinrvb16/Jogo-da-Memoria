@@ -16,6 +16,8 @@ import java.util.Arrays;
 public class JogoFacil extends JogosMae{
 	protected Carta[] cartas;
 	private JPanel painelA;
+	protected long tempoDeJogo;
+	protected long iniciaContaTempo;
 	boolean comecou = false;
 	int contaClique = 0;
 	MouseEvent clique;
@@ -55,9 +57,12 @@ public class JogoFacil extends JogosMae{
 	};
       
 		public JogoFacil() {
-			
-			super();
 						
+			super();
+			
+			Cronometro cronometro = new Cronometro();
+			iniciaContaTempo = cronometro.getAtual();
+			
             int qtdCartas = 8;
             int qtdImagens = 4;
 			painelA = new JPanel();
@@ -65,7 +70,7 @@ public class JogoFacil extends JogosMae{
 			painelA.setLayout(new GridLayout(2, 4));
 			cartas = new Carta[qtdCartas];
             
-			//??????????????????????????????????????????????????????????????????????????????????????
+			//da um numero para cada carta
             int numeroCarta = 1;
 			for(int i = 0; i < qtdCartas; i++) {
 				cartas[i] = new Carta(numeroCarta);
@@ -89,7 +94,11 @@ public class JogoFacil extends JogosMae{
 			ButtonHandler handler = new ButtonHandler();
 			for(int i = 0; i < qtdCartas; i++) {
 				cartas[i].addActionListener(handler);
-			}                       
+			} 
+			
+			//no final do jogo
+			tempoDeJogo = cronometro.getAtual() - iniciaContaTempo;//tem que ser chamado quando o jogo acabar. fazer metodo jogoAcabou
+			
 		}
 		
 		public void sortear() {

@@ -33,7 +33,6 @@ public class ControladorJogo extends JFrame {
     protected JDesktopPane desktop;
     protected ImageIcon icon;
     protected Image image;
-	 
     public ControladorJogo(){
         
         super("Jogo da Memoria");
@@ -131,6 +130,8 @@ public class ControladorJogo extends JFrame {
 							jogoDificil.setVisible(true);
 							jogoDificil.setResizable(true);
 						}
+						
+						
 					}
         }
         );
