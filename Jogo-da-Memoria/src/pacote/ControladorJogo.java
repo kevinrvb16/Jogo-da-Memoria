@@ -25,9 +25,8 @@ public class ControladorJogo extends JFrame {
 	protected JButton iniciar;
     protected JButton ranking;
     protected JButton opcaoNivel;
-    //protected JButton pausar;
     protected JButton sair;
-    protected String nivelSelecionado = "facil";
+    protected String nivelSelecionado = "facil";///////////////////////////////////////////MUDAR DEPOIS 
     protected JButton facil;
     protected JButton medio;
     protected JButton dificil;
@@ -37,10 +36,10 @@ public class ControladorJogo extends JFrame {
 	 
     public ControladorJogo(){
         
-        super("Jogo da Memória");
+        super("Jogo da Memoria");
         JMenuBar bar = new JMenuBar();
-        JMenu menu= new JMenu("Opcões");
-        JMenuItem frameInterno = new JMenuItem("Selecionar Nível");
+        JMenu menu= new JMenu("Opcoes");
+        JMenuItem frameInterno = new JMenuItem("Selecionar Nivel");
         
         setJMenuBar(bar);
         bar.add(menu);
@@ -66,9 +65,9 @@ public class ControladorJogo extends JFrame {
 						frame.setSize(160, 170);
 						frame.setVisible(true);
 						desktop.add(frame);
-						facil = new JButton(" Nível Fácil ");
-						medio = new JButton(" Nível Médio ");
-						dificil = new JButton(" Nível Difícil ");
+						facil = new JButton(" Nivel Facil ");
+						medio = new JButton(" Nivel Medio ");
+						dificil = new JButton(" Nivel Dificil ");
 						
 						painelB.add(facil);
 						painelB.add(medio);
@@ -84,7 +83,7 @@ public class ControladorJogo extends JFrame {
 						medio.addActionListener( new ActionListener() {
 							@Override
 							public void actionPerformed(ActionEvent arg0) {
-								nivelSelecionado ="médio";
+								nivelSelecionado ="medio";
 								frame.setVisible(false);
 							}
 						});
@@ -92,13 +91,14 @@ public class ControladorJogo extends JFrame {
 
 							@Override
 							public void actionPerformed(ActionEvent arg0) {
-								nivelSelecionado ="difícil";
+								nivelSelecionado ="dificil";
 								frame.setVisible(false);
 							}	
 						});
 					}
         		}	
         );
+        
         ImageIcon icon = new ImageIcon(getClass().getResource("dog.jpg"));
         image = icon.getImage();
         GridLayout grid = new GridLayout();
@@ -117,14 +117,14 @@ public class ControladorJogo extends JFrame {
 							jogoFacil.setVisible(true);
 							jogoFacil.setResizable(true);
 						}
-						if(nivelSelecionado.equalsIgnoreCase("médio")){
+						if(nivelSelecionado.equalsIgnoreCase("medio")){
 							JogoFacil jogoNormal = new JogoFacil();
 							jogoNormal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 							jogoNormal.setSize(800, 500);
 							jogoNormal.setVisible(true);
 							jogoNormal.setResizable(true);
 						}
-						if(nivelSelecionado.equalsIgnoreCase("difícil")){
+						if(nivelSelecionado.equalsIgnoreCase("dificil")){
 							JogoFacil jogoDificil = new JogoFacil();
 							jogoDificil.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 							jogoDificil.setSize(800, 500);
@@ -140,9 +140,7 @@ public class ControladorJogo extends JFrame {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						
 					}
-        			
         		}
         );
         
@@ -153,9 +151,7 @@ public class ControladorJogo extends JFrame {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						System.exit(EXIT_ON_CLOSE);
-						
 					}
-        			
         		}
         );
         
@@ -164,7 +160,6 @@ public class ControladorJogo extends JFrame {
         iniciar.setSize(230, 70);
         
         ranking.setLocation(310, 60);
-        
         
         desktop.add(ranking);
         ranking.setSize(230,40);

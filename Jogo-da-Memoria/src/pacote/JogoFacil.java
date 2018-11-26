@@ -15,60 +15,80 @@ public class JogoFacil extends JogosMae{
 	private JPanel painelA;
         
 	MouseEvent clique;
+	public final ImageIcon imagemFundo = new ImageIcon(getClass().getResource("FUNDO.jpg"));
 	public final ImageIcon[] arrayFundos = {
-			new ImageIcon(getClass().getResource("FUNDO.jpg")),
 			new ImageIcon(getClass().getResource("1.jpg")),
 			new ImageIcon(getClass().getResource("2.jpg")),
 			new ImageIcon(getClass().getResource("3.jpg")),
-			new ImageIcon(getClass().getResource("4.jpg")),
-
-                        
+			new ImageIcon(getClass().getResource("4.jpg")),   
+			new ImageIcon(getClass().getResource("5.jpg")),
+			new ImageIcon(getClass().getResource("6.jpg")),
+			new ImageIcon(getClass().getResource("7.jpg")),
+			new ImageIcon(getClass().getResource("8.jpg")),
+			new ImageIcon(getClass().getResource("9.jpg")),
+			new ImageIcon(getClass().getResource("10.jpg")),
+			new ImageIcon(getClass().getResource("11.jpg")),
+			new ImageIcon(getClass().getResource("12.jpg")),
+			new ImageIcon(getClass().getResource("13.jpg")),
+			new ImageIcon(getClass().getResource("14.jpg")),
+			new ImageIcon(getClass().getResource("15.jpg")),
+			new ImageIcon(getClass().getResource("16.jpg")),
+			new ImageIcon(getClass().getResource("17.jpg")),
+			new ImageIcon(getClass().getResource("18.jpg")),
+			new ImageIcon(getClass().getResource("19.jpg")),
+			new ImageIcon(getClass().getResource("20.jpg")),
+			new ImageIcon(getClass().getResource("21.jpg")),
+			new ImageIcon(getClass().getResource("22.jpg")),
+			new ImageIcon(getClass().getResource("23.jpg")),
+			new ImageIcon(getClass().getResource("24.jpg")),
+			new ImageIcon(getClass().getResource("25.jpg")),
+			new ImageIcon(getClass().getResource("26.jpg")),
+			new ImageIcon(getClass().getResource("27.jpg")),
+			new ImageIcon(getClass().getResource("28.jpg")),
+			new ImageIcon(getClass().getResource("29.jpg")),
+			new ImageIcon(getClass().getResource("30.jpg")),
 	};
 	
-		//trocar pra string
-		//public String[] arrayFundos2;
-    //	ArrayList<String> posicao = (ArrayList<String>) (Arrays.asList(arrayFundos2));
-        
-        
+		//ArrayList<String> imagemSorteada = (ArrayList<String>) (Arrays.asList(arrayFundos));
+                
 		public JogoFacil() {
 			
 			super();
-			//nao funcionou pra ImageIcon, vamos relacionar cada carta com uma posicao pra fazer
-			//Collections.sort(posicao);
-			//Collections.sort(posicao);
 			
-                        int qtdCartas = 8;
-                        int qtdImagens = 4;
+			///////////////////////////////////////////////////SORTEANDO AS IMAGENS DAS CARTAS
+			//Arrays.sort(arrayFundos);
+						
+            int qtdCartas = 8;
+            int qtdImagens = 4;
 			painelA = new JPanel();
 			add(painelA);
 			painelA.setLayout(new GridLayout(2, 4));
 			cartas = new Carta[qtdCartas];
-                        
-                        int numeroCarta = 1;
+            
+			//??????????????????????????????????????????????????????????????????????????????????????
+            int numeroCarta = 1;
 			for(int i = 0; i < qtdCartas; i++) {
 				cartas[i] = new Carta(numeroCarta);
-                                numeroCarta++;
-                                if(numeroCarta > qtdImagens){
-                                    numeroCarta = 1;}
+                numeroCarta++;
+                if(numeroCarta > qtdImagens){
+                numeroCarta = 1;
+                }
 			}
 			
+			//adicionando imagem de fundo para todas as cartas
 			for(int i = 0; i < qtdCartas; i++) {
-			cartas[i].setIcon(arrayFundos[0]);
+			cartas[i].setIcon(imagemFundo);
 			}
-			
-					
-			//adicionando cartas ao frame
+								
+			//adicionando todas as cartas ao frame
 			for(int i = 0; i < qtdCartas; i++) {
 			painelA.add(cartas[i]);}
-
 			
-			//adicionando handlers
+			//adicionando handlers a todas as cartas
 			ButtonHandler handler = new ButtonHandler();
 			for(int i = 0; i < qtdCartas; i++) {
 				cartas[i].addActionListener(handler);
-			}        
-                        
-                        
+			}                       
 		}
                   
 	//classe listener com erro

@@ -4,7 +4,6 @@ public class ControladorCarta implements IControladorCarta {
 
 	int pontos;
 	
-
 	@Override
 	public void comparaCarta(Carta botao1, Carta botao2) {
 		if(botao1.getImageIcon() == botao2.getImageIcon()) {
@@ -14,26 +13,21 @@ public class ControladorCarta implements IControladorCarta {
 		else
 			desvirar(botao1);
 			desvirar(botao2);
-		
 	}
 
 	@Override
 	public void virarCarta() {
-		// TODO Auto-generated method stub
-		
+		// if a carta eh clicada, recebe uma imagem sorteada 
+		// 2 botoes tem cartas iguais
 	}
-
 
 	@Override
 	public void sumir(Carta carta) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void desvirar(Carta carta) {
 		// TODO Auto-generated method stub
-		
 	}
-
 }
