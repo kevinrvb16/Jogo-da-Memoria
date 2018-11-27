@@ -8,6 +8,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -18,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 public class ControladorJogo extends JFrame {
 
@@ -33,6 +35,7 @@ public class ControladorJogo extends JFrame {
     protected JDesktopPane desktop;
     protected ImageIcon icon;
     protected Image image;
+    protected long tempo;
     public ControladorJogo(){
         
         super("Jogo da Memoria");
@@ -141,6 +144,29 @@ public class ControladorJogo extends JFrame {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						JogoFacil jogo = new JogoFacil();
+						Historico hist = new Historico(jogo.tempoDeJogo);
+						ReadSequentialFile read = new ReadSequentialFile();
+						read.openFile();
+						ArrayList<Historico> scores = read.readRecords();
+						read.closeFile();
+						
+						
+						CreateSequentialFile application = new CreateSequentialFile();
+
+					      application.openFile();
+					      
+					      for(int i = 0; scores.size()<i ; i++) {
+					    	  read.listaHist = scores ;
+					    	  
+					      }
+					    		  
+					      application.addRecords(hist.getTempo());
+					
+					      application.closeFile();
+						
+					      
+						JOptionPane.showMessageDialog(null,hist.getTempo() + "\n" +  hist.getTempo(), "SCORE", JOptionPane.PLAIN_MESSAGE);
 					}
         		}
         );
