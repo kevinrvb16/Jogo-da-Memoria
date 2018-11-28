@@ -38,13 +38,8 @@ public ArrayList<Historico> readRecords()
          record = ( Historico ) input.readObject();
          listaHist.add(record);
       }
-           
    }
-      
-   catch ( EOFException endOfFileException )
-   {
-	      System.err.println( "endOfFileException." );
-   } // end catch
+   catch (EOFException ignored){} // end catch
    catch ( ClassNotFoundException classNotFoundException )
    {
       System.err.println( "Unable to create object." );
@@ -65,7 +60,6 @@ public void closeFile()
    {
       if ( input != null )
          input.close();
-      System.exit( 0 );
    } // end try
    catch ( IOException ioException )
    {

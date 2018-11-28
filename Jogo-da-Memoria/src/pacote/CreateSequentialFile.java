@@ -17,7 +17,7 @@ public class CreateSequentialFile
       try // open file
       {
          output = new ObjectOutputStream(
-            new FileOutputStream( "historico.ser" ) );
+            new FileOutputStream( "./historico.ser" ) );
       } // end try
       catch ( IOException ioException )
       {

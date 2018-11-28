@@ -9,6 +9,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -143,9 +144,38 @@ public class ControladorJogo extends JFrame {
         		new ActionListener() {
 
 					@Override
-					public void actionPerformed(ActionEvent e) {
-						JogoFacil jogo = new JogoFacil();
-						Historico hist = new Historico(jogo.tempoDeJogo);
+					public void actionPerformed(ActionEvent e) {						
+						ArrayList<Historico> scores = new ArrayList<>();
+						ReadSequentialFile read = new ReadSequentialFile();
+						read.openFile();
+						scores = read.readRecords();
+						read.closeFile();
+						
+						Comparator<Historico> ch = new Comparator<Historico>() {
+							@Override
+							public int compare(Historico h1, Historico h2) {
+								if (h1.getTempo() < h2.getTempo()) {
+									return -1;
+								} else {
+									if (h1.getTempo() == h2.getTempo()) {
+										return 0;
+									} else {
+										return 1;
+									}
+								}
+							};
+						};
+						
+						scores.sort(ch);
+						
+						
+						StringBuilder strings = new StringBuilder();
+						for (int i = 0; i < scores.size() ; i++) {
+							strings.append("Jogador " + (i+1) + " - " + scores.get(i).getTempo() + "\n");	
+						}
+						JOptionPane.showMessageDialog(null, strings, "SCORES", JOptionPane.PLAIN_MESSAGE);
+						/*JogoFacil jogo = new JogoFacil();
+						Historico hist = new Historico(10);
 						ReadSequentialFile read = new ReadSequentialFile();
 						read.openFile();
 						ArrayList<Historico> scores = read.readRecords();
@@ -167,6 +197,7 @@ public class ControladorJogo extends JFrame {
 						
 					      
 						JOptionPane.showMessageDialog(null,hist.getTempo() + "\n" +  hist.getTempo(), "SCORE", JOptionPane.PLAIN_MESSAGE);
+					*/
 					}
         		}
         );

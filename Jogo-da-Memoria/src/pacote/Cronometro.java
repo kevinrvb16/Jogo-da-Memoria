@@ -12,7 +12,7 @@ public class Cronometro {
     // retorna tempo em segundos   
     // nao interrompe o cronometro, pode ser chamado varias vezes  
     public long getAtual() {  
-        long mili = System.currentTimeMillis() - inicio;  
+        long mili = System.currentTimeMillis() - inicio;
         fim = Math.round(mili / 1000.0);  
         return fim;
         

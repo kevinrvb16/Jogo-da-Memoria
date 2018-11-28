@@ -98,7 +98,15 @@ public class JogoFacil extends JogosMae{
 			
 			//no final do jogo
 			tempoDeJogo = cronometro.getAtual() - iniciaContaTempo;//tem que ser chamado quando o jogo acabar. fazer metodo jogoAcabou
+			tempoDeJogo = 10; // apenas para testes
 			
+			// -----------------------------------------------------------
+			// final do jogo
+			// salva no arquivo
+			CreateSequentialFile create = new CreateSequentialFile();
+			create.openFile();
+			create.addRecords(tempoDeJogo); // <======= tem q ser o tempo final
+			create.closeFile(); // isso deve ir pro final do jogo 
 		}
 		
 		public void sortear() {
