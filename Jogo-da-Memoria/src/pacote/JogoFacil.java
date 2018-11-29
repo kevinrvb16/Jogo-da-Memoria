@@ -15,6 +15,7 @@ import java.util.Arrays;
 
 public class JogoFacil extends JogosMae{
 	protected Carta[] cartas;
+	ControladorCarta controlador;
 	private JPanel painelA;
 	protected long tempoDeJogo;
 	protected long iniciaContaTempo;
@@ -59,7 +60,8 @@ public class JogoFacil extends JogosMae{
 		public JogoFacil() {
 						
 			super();
-			
+
+			controlador = new ControladorCarta();
 			Cronometro cronometro = new Cronometro();
 			iniciaContaTempo = cronometro.getAtual();
 			
@@ -106,81 +108,102 @@ public class JogoFacil extends JogosMae{
 			CreateSequentialFile create = new CreateSequentialFile();
 			create.openFile();
 			create.addRecords(tempoDeJogo); // <======= tem q ser o tempo final
-			create.closeFile(); // isso deve ir pro final do jogo 
+			create.closeFile(); // isso deve ir pro final do jogo
 		}
 		
-		public void sortear() {
-			ImageIcon aux;
-			Random random = new Random();
-			for (int i = 0; i < 29; i++) {
-				aux = arrayFundos[i];
+		/*public void sortear() {
+			int[] numerosRng = new int[8];
+
+			//horror necessario feat. merda nenhuma funciona
+			numerosRng[0] = 2;
+			numerosRng[1] = 2;
+			numerosRng[2] = 1;
+			numerosRng[3] = 0;
+			numerosRng[4] = 2;
+			numerosRng[5] = 3;
+			numerosRng[6] = 1;
+			numerosRng[7] = 0;
+
+			/*Random random = new Random();
+			for (int i = 0; i < 4; i++) {
 				int rng = random.nextInt(30);//rng = Random Number Generators
-				arrayFundos[i] = arrayFundos[rng];
-				arrayFundos[rng] = aux;
+				numerosRng[i] = rng;
+			}*/
+			/*
+			for(int i = 0; i < 4; i++) {
+				cartas[i].setNumeroImagem(numerosRng[i]);
+				System.out.println(numerosRng[i]);
 			}
 
-			cartaComPar[0] = arrayFundos[0];
-			cartaComPar[1] = arrayFundos[1];
-			cartaComPar[2] = arrayFundos[2];
-			cartaComPar[3] = arrayFundos[3];
-			cartaComPar[4] = arrayFundos[0];
-			cartaComPar[5] = arrayFundos[1];
-			cartaComPar[6] = arrayFundos[2];
-			cartaComPar[7] = arrayFundos[3];
-			
-		}
-                  
+
+			//horror necessario feat. merda nenhuma funciona
+
+
+			for(int i = 0; i < 4; i++) {
+				cartas[i+4].setNumeroImagem(numerosRng[i]);
+				System.out.println(numerosRng[i]);
+			}
+
+			sortear();
+
+
+		}*/
+
 	//classe listener com erro
 	class ButtonHandler implements ActionListener {
-            Carta botao1 = null;
-			Carta botao2 = null;
-            boolean botao2Clicado = false;
-            
+		Carta botao1 = null;
+		Carta botao2 = null;
+		boolean botao2Clicado = false;
+
 		@Override
 		public void actionPerformed(ActionEvent event) {
-			if (contaClique == 2) {
-            	for(int i = 0; i < 8; i++) {
-    				cartas[i].setIcon(imagemFundo);
-    			}
-            	contaClique = 0;
-            }
-            contaClique++;
-			Random num = new Random();
-			Carta botao = (Carta) event.getSource();
-			if (!comecou) { 
-				sortear(); 
+
+			contaClique++;
+			//comeca jogo
+			if (!comecou) {
+				//sortear();
 			}
 			comecou = true;
-            botao.setIcon(cartaComPar[num.nextInt(4)]);
-            
-            
-				/*//System.out.println("botao1= "+botao1);
-				//System.out.println("botao2= "+botao2);
-				while((botao1 == null || botao2 == null) && botao2Clicado == false) {
-					source = (JButton) event.getSource();
-					if(botao1 == null){
-						botao1 = source;
-                                                System.out.println(botao1);}
-					else
-						if(source == botao1)
-							return;
-                                                else{
-                                                        botao2Clicado = true;
-							botao2 = source;}
+
+			Carta source = null;
+
+			//armazena os botoes para comparacao, vira carta
+			while((botao1 == null || botao2 == null) && botao2Clicado == false) {
+				source = (Carta) event.getSource();
+				if(botao1 == null){
+					botao1 = source;
+					System.out.println(botao1.getNumeroImagem());
+					controlador.virarCarta(botao1);
 				}
-				System.out.println(botao1);
-				System.out.println(botao2);*/
-			
-                
-              
-                //int random = (int) (Math.random() * 6) + 1;
-                //botao1.setIcon(arrayFundos[random]);		
-                
-                //metodo compara cartas
-                //if(botao1.getImagemFundo() == botao2.getImagemFundo()) {}
-			//}	
-			
-			//public void comparaCartas() 
-		}   
+				else
+				if(source == botao1) {
+					return;
+				} else {
+					botao2Clicado = true;
+					botao2 = source;
+					System.out.println(botao2.getNumeroImagem());
+					controlador.virarCarta(botao2);
+				}
+
+				if (contaClique == 2) {
+					if(controlador.comparaCarta(botao1, botao2) == true) {
+						//controlador.sumir(botao1);
+						//controlador.sumir(botao2);
+						botao1 = null;
+						botao2 = null;
+					}else {
+						for(int i = 0; i < 8; i++) {
+							//susbstituir por desvirarCarta();
+							cartas[i].setIcon(imagemFundo);
+						}
+						contaClique = 0;
+						botao2Clicado = false;
+					}
+
+				}
+
+
+			}
+		}
 	}
 }

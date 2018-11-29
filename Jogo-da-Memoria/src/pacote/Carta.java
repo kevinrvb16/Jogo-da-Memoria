@@ -26,7 +26,7 @@ public class Carta extends JButton {
 				new ImageIcon(getClass().getResource("14.jpg")),
 				new ImageIcon(getClass().getResource("15.jpg")),
 				new ImageIcon(getClass().getResource("16.jpg")),
-				new ImageIcon(getClass().getResource("17.jpg")),
+				new ImageIcon(getClass().getResource("18.jpg")),
 				new ImageIcon(getClass().getResource("18.jpg")),
 				new ImageIcon(getClass().getResource("19.jpg")),
 				new ImageIcon(getClass().getResource("20.jpg")),
