@@ -105,10 +105,10 @@ public class JogoFacil extends JogosMae{
 			// -----------------------------------------------------------
 			// final do jogo
 			// salva no arquivo
-			CreateSequentialFile create = new CreateSequentialFile();
-			create.openFile();
-			create.addRecords(tempoDeJogo); // <======= tem q ser o tempo final
-			create.closeFile(); // isso deve ir pro final do jogo
+			//CreateSequentialFile create = new CreateSequentialFile();
+			//create.openFile();
+			//create.addRecords(tempoDeJogo); // <======= tem q ser o tempo final
+			//create.closeFile(); // isso deve ir pro final do jogo
 		}
 		
 		/*public void sortear() {
@@ -157,53 +157,41 @@ public class JogoFacil extends JogosMae{
 
 		@Override
 		public void actionPerformed(ActionEvent event) {
-
+			
+			
+			System.out.println(botao2Clicado);
 			contaClique++;
-			//comeca jogo
+			
 			if (!comecou) {
-				//sortear();
+				comecou = true;
 			}
-			comecou = true;
-
+			
 			Carta source = null;
 
 			//armazena os botoes para comparacao, vira carta
-			while((botao1 == null || botao2 == null) && botao2Clicado == false) {
+				System.out.println("teste");
 				source = (Carta) event.getSource();
 				if(botao1 == null){
 					botao1 = source;
-					System.out.println(botao1.getNumeroImagem());
 					controlador.virarCarta(botao1);
-				}
-				else
-				if(source == botao1) {
-					return;
-				} else {
-					botao2Clicado = true;
-					botao2 = source;
-					System.out.println(botao2.getNumeroImagem());
-					controlador.virarCarta(botao2);
-				}
-
-				if (contaClique == 2) {
-					if(controlador.comparaCarta(botao1, botao2) == true) {
-						//controlador.sumir(botao1);
-						//controlador.sumir(botao2);
+				} else
+				if(source != botao1) {
+					if(controlador.comparaCarta(botao1, source) == true) {
+						controlador.virarCarta(source);
 						botao1 = null;
-						botao2 = null;
+						source = null;
+						System.out.println(botao1);
+						System.out.println(source);
 					}else {
-						for(int i = 0; i < 8; i++) {
-							//susbstituir por desvirarCarta();
-							cartas[i].setIcon(imagemFundo);
-						}
-						contaClique = 0;
-						botao2Clicado = false;
+						controlador.desvirar(botao1);
+						controlador.desvirar(source);
+						botao1 = null;
+						source = null;
 					}
-
+				} else {
+					return;
 				}
-
-
-			}
+				
 		}
 	}
 }
