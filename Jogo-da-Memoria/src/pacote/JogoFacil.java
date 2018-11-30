@@ -208,7 +208,7 @@ public class JogoFacil extends JogosMae{
 			if(qtdAcertos >= 4) {
 				comecou = false;
 				System.out.println("ganhouuu");
-				JOptionPane.showMessageDialog(null, "VocÃª Ganhou!!");
+				JOptionPane.showMessageDialog(null, "Você Ganhou!!");
 				System.exit(EXIT_ON_CLOSE);
 			}
 				

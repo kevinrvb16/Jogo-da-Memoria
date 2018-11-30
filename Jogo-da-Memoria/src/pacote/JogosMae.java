@@ -8,7 +8,7 @@ public abstract class JogosMae extends JFrame {
 	
 	public JogosMae(){
 		
-		super("Jogo da Memória");
+		super("Jogo da Memï¿½ria");
 	}
 
 	public JogosMae(String nomeJanela) {
