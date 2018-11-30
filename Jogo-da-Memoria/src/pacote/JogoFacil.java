@@ -21,6 +21,8 @@ public class JogoFacil extends JogosMae{
 	protected long iniciaContaTempo;
 	boolean comecou = false;
 	int contaClique = 0;
+    int qtdCartas = 8;
+    int qtdImagens = 4;
 	MouseEvent clique;
 	private ImageIcon[] cartaComPar = new ImageIcon[8];
 	public final ImageIcon imagemFundo = new ImageIcon(getClass().getResource("FUNDO.jpg"));
@@ -59,7 +61,7 @@ public class JogoFacil extends JogosMae{
       
 		public JogoFacil() {
 						
-			super();
+			super("Jogo Facil");
 
 			controlador = new ControladorCarta();
 			Cronometro cronometro = new Cronometro();
@@ -96,7 +98,15 @@ public class JogoFacil extends JogosMae{
 			ButtonHandler handler = new ButtonHandler();
 			for(int i = 0; i < qtdCartas; i++) {
 				cartas[i].addActionListener(handler);
-			} 
+			}
+			
+			
+			int[] numerosRng = new int[8];
+
+
+			
+			
+			
 			
 			//no final do jogo
 			tempoDeJogo = cronometro.getAtual() - iniciaContaTempo;//tem que ser chamado quando o jogo acabar. fazer metodo jogoAcabou
@@ -111,7 +121,7 @@ public class JogoFacil extends JogosMae{
 			//create.closeFile(); // isso deve ir pro final do jogo
 		}
 		
-		/*public void sortear() {
+		public void sortear() {
 			int[] numerosRng = new int[8];
 
 			//horror necessario feat. merda nenhuma funciona
@@ -124,12 +134,13 @@ public class JogoFacil extends JogosMae{
 			numerosRng[6] = 1;
 			numerosRng[7] = 0;
 
-			/*Random random = new Random();
-			for (int i = 0; i < 4; i++) {
+			Random random = new Random();
+			for (int i = 0; i < 8; i++) {
 				int rng = random.nextInt(30);//rng = Random Number Generators
 				numerosRng[i] = rng;
-			}*/
-			/*
+			}
+			
+			
 			for(int i = 0; i < 4; i++) {
 				cartas[i].setNumeroImagem(numerosRng[i]);
 				System.out.println(numerosRng[i]);
@@ -144,54 +155,64 @@ public class JogoFacil extends JogosMae{
 				System.out.println(numerosRng[i]);
 			}
 
-			sortear();
+			//sortear();
 
 
-		}*/
+		}
 
 	//classe listener com erro
 	class ButtonHandler implements ActionListener {
 		Carta botao1 = null;
-		Carta botao2 = null;
-		boolean botao2Clicado = false;
+		int qtdAcertos = 0;
+
 
 		@Override
 		public void actionPerformed(ActionEvent event) {
 			
-			
-			System.out.println(botao2Clicado);
+			Carta source = null;
 			contaClique++;
 			
 			if (!comecou) {
 				comecou = true;
+				//sortear();
 			}
 			
-			Carta source = null;
 
 			//armazena os botoes para comparacao, vira carta
-				System.out.println("teste");
-				source = (Carta) event.getSource();
-				if(botao1 == null){
-					botao1 = source;
-					controlador.virarCarta(botao1);
-				} else
-				if(source != botao1) {
-					if(controlador.comparaCarta(botao1, source) == true) {
-						controlador.virarCarta(source);
-						botao1 = null;
-						source = null;
-						System.out.println(botao1);
-						System.out.println(source);
-					}else {
-						controlador.desvirar(botao1);
-						controlador.desvirar(source);
-						botao1 = null;
-						source = null;
-					}
-				} else {
-					return;
+			System.out.println("teste");
+			source = (Carta) event.getSource();
+			if(botao1 == null){
+				botao1 = source;
+				controlador.virarCarta(botao1);
+			} else
+			if(source != botao1) {
+				if(controlador.comparaCarta(botao1, source) == true) {
+					controlador.virarCarta(source);
+					botao1 = null;
+					source = null;
+					System.out.println(botao1);
+					System.out.println(source);
+					qtdAcertos++;
+					System.out.println(qtdAcertos);
+					
+				}else {
+					controlador.desvirar(botao1);
+					controlador.desvirar(source);
+					botao1 = null;
+					source = null;
 				}
+			} else {
+				return;
+			}
+			
+			if(qtdAcertos >= 4) {
+				comecou = false;
+				System.out.println("ganhouuu");
+				JOptionPane.showMessageDialog(null, "Você Ganhou!!");
+				System.exit(EXIT_ON_CLOSE);
+			}
 				
-		}
+			
 	}
+}
 }
