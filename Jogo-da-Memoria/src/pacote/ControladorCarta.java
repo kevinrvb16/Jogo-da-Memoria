@@ -22,7 +22,7 @@ public class ControladorCarta implements IControladorCarta {
 			ehPar = false;
 			desvirar(botao1);
 			desvirar(botao2);}
-		return true;
+		return ehPar;
 	}
 
 	@Override
@@ -40,6 +40,6 @@ public class ControladorCarta implements IControladorCarta {
 	@Override
 	public void desvirar(Carta carta) {
 		carta.setIcon(new ImageIcon(getClass().getResource("FUNDO.jpg")));
+		carta = null;
 	}
 }
-
